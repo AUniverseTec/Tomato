@@ -1,0 +1,35 @@
+Tomato OS
+├── kernel
+│   ├── linux_kernel_source_code
+│   └── kernel_modules
+├── system_libs
+│   ├── libc
+│   ├── libm
+│   └── libtomato
+├── framework
+│   ├── api
+│   │   ├── tomato_api.h
+│   │   └── tomato_api.c
+│   ├── libs
+│   │   ├── libtomato_ui
+│   │   └── libtomato_fs
+│   └── utils
+│       ├── tomato_init
+│       └── tomato_shutdown
+├── apps
+│   ├── wallpapers
+│   │   ├── wallpapers.c
+│   │   └── wallpapers.h
+│   ├── calculator
+│   │   ├── calculator.c
+│   │   └── calculator.h
+│   ├── file_manager
+│   │   ├── file_manager.c
+│   │   └── file_manager.h
+│   └── ...
+├── toml_format
+│   ├── toml_parser.c
+│   └── toml_parser.h
+└── build_system
+    ├── Makefile
+    └── build_scripts
