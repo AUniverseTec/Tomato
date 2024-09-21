@@ -1,28 +1,24 @@
 #!/bin/bash
 
-# Create the directory structure for Tomato OS
-mkdir -p ~/TomatoOS/{boot,bin,lib,usr,etc,var,tmp}
+# Identify the USB device
+USB_DEVICE=$(lsblk | grep -o "/dev/sd[b-z][1-9]")
 
-# Create the files for Tomato OS
-touch ~/TomatoOS/boot/kernel
-touch ~/TomatoOS/bin/init
-touch ~/TomatoOS/lib/libc.so.6
-touch ~/TomatoOS/usr/bin/bash
-touch ~/TomatoOS/etc/fstab
-touch ~/TomatoOS/etc/passwd
-touch ~/TomatoOS/var/log/syslog
-touch ~/TomatoOS/tmp/example.txt
+# Check if USB device is found
+if [ -z "$USB_DEVICE" ]; then
+  echo "USB device not found"
+  exit 1
+fi
 
-# Find the USB drive connected to the PC
-USB_DRIVE=$(lsblk -d -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL | grep -i "usb" | awk '{print $1}')
+# Mount the USB device
+sudo mkdir /mnt/usb
+sudo mount $USB_DEVICE /mnt/usb
 
-# Mount the USB drive
-sudo mount /dev/$USB_DRIVE /mnt
+# Copy the file or folder
+cp /path/to/Tomato.rar /mnt/usb/
+# or
+# cp -r /path/to/Tomato /mnt/usb/
 
-# Copy the Tomato OS files to the USB drive
-sudo cp -r ~/TomatoOS/* /mnt/
+# Unmount the USB device
+sudo umount /mnt/usb
 
-# Unmount the USB drive
-sudo umount /mnt
-
-echo "Tomato OS files created and transferred to USB drive!"
+#  replace /path/to/Tomato.rar or /path/to/Tomato with the actual path to the file or folder you want to transfer
